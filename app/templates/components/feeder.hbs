@@ -1,0 +1,94 @@
+<div class="container">
+    <div class="section">
+        <span class="label label-info">{{this.serverStatus}}</span>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Manual Feeder</div>
+    <div class="panel-body">
+        <div class="section">
+            <div class="row">
+                <button class="btn" {{action "regularFeedingNow"}} disabled={{this.isBusy}}>
+                    <span class="glyphicon glyphicon-cutlery"></span>
+                    Regular Feeding Now
+                </button>
+            </div>
+            <div class="section">
+                <h4>Maintenance</h4>
+                <div class="row">
+                    <button class="btn" {{action "doorClose"}} disabled={{this.isBusy}}>
+                        Close Door
+                    </button>&nbsp;
+                    <button class="btn" {{action "doorOpen"}} disabled={{this.isBusy}}>
+                        Open Door
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Automatic Feeder</div>
+    <div class="panel-body">
+        <div class="section">
+            <h4>Current Jobs</h4>
+
+            {{#if hasJobs}}
+                {{#each jobs as |job|}}
+                    <div class="row">
+                        <button class="btn btn-small" {{action "cancelJob" job.id}} disabled={{this.isBusy}}>
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                        <span class="regular-text">&nbsp;{{job.english}}</span>
+                    </div>
+                {{/each}}
+            {{else}}
+                <div class="row">
+                    <span class="regular-text">(No jobs scheduled.)</span>
+                </div>>
+            {{/if}}
+
+        </div>
+        <div class="section">
+            <h4>New Job</h4>
+            <div class="row">
+                <div class="input-group">
+                    {{input
+                        value=this.cronJobEnglish
+                        placeholder="E.g. 'every day at 6:30am'"
+                        class="form-control"
+                        disabled=this.isBusy
+                    }}
+                    <span class="input-group-btn">
+                    <button class="btn" {{action "submitCronJob"}} disabled={{this.isBusy}}>
+                        <span class="glyphicon glyphicon-time"></span>
+                        Schedule Job
+                    </button>
+                </span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Log</div>
+    <div class="panel-body">
+        {{#each this.messages as |message index|}}
+            <div class="row">
+                <span class="timestamp">{{message.timestamp}}
+                    {{#if (eq index 0)}}
+                        <span class="label {{if message.error 'label-danger'}} {{if message.complete 'label-success'}}">
+                            {{message.status}}
+                        </span>
+                    {{else}}
+                        {{message.status}}
+                    {{/if}}
+                </span>
+            </div>
+        {{/each}}
+    </div>
+</div>

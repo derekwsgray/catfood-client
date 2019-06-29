@@ -1,0 +1,37 @@
+& {
+    display: flex;
+    flex-flow: column;
+
+    padding: 5px;
+}
+
+.section {
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    .row {
+        display: flex;
+        flex-flow: row;
+        align-items: baseline;
+
+        margin: 10px;
+    }
+}
+
+.regular-text {
+    font-size: 0.6em;
+}
+
+.timestamp {
+    font-size: 0.5em;
+    color: grey;
+    margin-right: 10px;
+}
+
+.operation-status {
+    margin-left: 20px;
+}
+
+.server-status {
+    font-size: 0.6em;
+}
