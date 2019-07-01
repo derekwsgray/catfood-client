@@ -25,20 +25,7 @@ export default Component.extend({
         this.set('messages', []);
         this.set('cronJobEnglish', null);
 
-        this.set('jobs', [
-            {
-                id: 1,
-                english: 'every day at 6:00am'
-            },
-            {
-                id: 2,
-                english: 'every day at 6:00am'
-            },
-            {
-                id: 3,
-                english: 'every day at 6:00am'
-            }
-        ]);
+        this.set('jobs', []);
     },
 
     hasJobs: notEmpty('jobs'),
@@ -54,6 +41,7 @@ export default Component.extend({
         socket.on('connect', this.openHandler, this);
         socket.on('disconnect', this.disconnectHandler, this);
         socket.on('server-status', this.serverStatusHandler, this);
+        socket.on('job-status', this.jobStatusHandler, this);
         socket.on('operation-status', this.operationStatusHandler, this);
         socket.on('message', this.messageHandler, this);
 
@@ -90,12 +78,18 @@ export default Component.extend({
         this.set('serverStatus', data.timestamp);
     },
 
+    jobStatusHandler(data) {
+        this.set('jobs', data.jobs);
+    },
+
     operationStatusHandler(data) {
 
         if (data.operation === 'feed-now') {
             this.set('feedNowStatus', data.status);
             later(() => {}, 5000);
         }
+
+        if (data.operation)
 
         this.set('operationStatus', data.status);
         this.messages.insertAt(0, data);
@@ -134,11 +128,19 @@ export default Component.extend({
             });
         },
 
-        submitCronJob() {
+        addJob() {
             this.set('isBusy', true);
             this.socket.emit('operation', {
-                operation: 'cron-job',
+                operation: 'add-job',
                 english: this.cronJobEnglish
+            });
+        },
+
+        deleteJob(jobId) {
+            this.set('isBusy', true);
+            this.socket.emit('operation', {
+                operation: 'delete-job',
+                jobId: jobId
             });
         }
 

@@ -15,17 +15,32 @@
         align-items: baseline;
 
         margin: 10px;
+
+        &.job {
+            align-items: center;
+        }
     }
 }
 
 .regular-text {
     font-size: 0.6em;
+
+    &.bold {
+        font-weight: bold;
+    }
 }
 
 .timestamp {
     font-size: 0.5em;
     color: grey;
     margin-right: 10px;
+}
+
+.job-info {
+    display: flex;
+    flex-flow: column;
+
+    margin-left: 10px;
 }
 
 .operation-status {
