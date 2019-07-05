@@ -1,9 +1,8 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
-import { later } from '@ember/runloop';
 import { notEmpty } from '@ember/object/computed';
 
-const hostname = window.location.hostname;
+const host = window.location.host;
 
 export default Component.extend({
 
@@ -29,12 +28,12 @@ export default Component.extend({
     },
 
     hasJobs: notEmpty('jobs'),
+    hasPhoto: notEmpty('latestPhoto'),
 
     didInsertElement() {
         this._super(...arguments);
 
-
-        const socket = this.websockets.socketFor(`ws://${hostname}:3000/`);
+        const socket = this.websockets.socketFor(`ws://${host}/`);
         socket.connect();
 
         // Event handlers
@@ -84,12 +83,9 @@ export default Component.extend({
 
     operationStatusHandler(data) {
 
-        if (data.operation === 'feed-now') {
-            this.set('feedNowStatus', data.status);
-            later(() => {}, 5000);
+        if (data.operation === 'latest-photo') {
+            this.set('latestPhoto', data.latestPhoto);
         }
-
-        if (data.operation)
 
         this.set('operationStatus', data.status);
         this.messages.insertAt(0, data);
@@ -121,7 +117,6 @@ export default Component.extend({
 
         regularFeedingNow() {
             this.set('isBusy', true);
-            this.set('feedNowStatus', 'Requesting...');
             this.socket.emit('operation', {
                 operation: 'feed-now',
                 servingSize: 1
@@ -141,6 +136,13 @@ export default Component.extend({
             this.socket.emit('operation', {
                 operation: 'delete-job',
                 jobId: jobId
+            });
+        },
+
+        takePhoto() {
+            this.set('isBusy', true);
+            this.socket.emit('operation', {
+                operation: 'take-photo'
             });
         }
 

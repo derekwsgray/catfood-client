@@ -1,4 +1,10 @@
 <div class="container">
+    {{#if session.isAuthenticated}}
+        <a {{action 'invalidateSession'}}>Logout</a>
+    {{else}}
+        {{#link-to 'login'}}Login{{/link-to}}
+    {{/if}}
+
     <h2>CatFood! v1.0</h2>
     <div class="body">
         {{outlet}}

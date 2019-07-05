@@ -53,6 +53,22 @@
 </div>
 
 <div class="panel panel-default">
+    <div class="panel-heading">Camera</div>
+    <div class="panel-body">
+        <div class="section">
+            {{#if hasPhoto}}
+                <div class="row">
+                    Taken at: {{this.latestPhoto.timestamp}}
+                </div>
+                <div class="row">
+                    <img src="{{this.latestPhoto.dataUrl}}"  alt="Last Photo Taken" />
+                </div>
+            {{/if}}
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-default">
     <div class="panel-heading">Manual Feeder</div>
     <div class="panel-body">
         <div class="section">
@@ -70,6 +86,11 @@
                     </button>&nbsp;
                     <button class="btn" {{action "doorOpen"}} disabled={{this.isBusy}}>
                         Open Door
+                    </button>
+                </div>
+                <div class="row">
+                    <button class="btn" {{action "takePhoto"}} disabled={{this.isBusy}}>
+                        Take Photo
                     </button>
                 </div>
             </div>
