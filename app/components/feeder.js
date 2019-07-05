@@ -28,7 +28,7 @@ export default Component.extend({
     },
 
     hasJobs: notEmpty('jobs'),
-    hasPhoto: notEmpty('latestPhoto'),
+    hasPhoto: notEmpty('latestPhoto.dataUrl'),
 
     didInsertElement() {
         this._super(...arguments);
