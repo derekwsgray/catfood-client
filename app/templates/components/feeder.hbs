@@ -40,11 +40,11 @@
                         disabled=this.isBusy
                     }}
                     <span class="input-group-btn">
-                    <button class="btn" {{action "addJob"}} disabled={{this.isBusy}}>
-                        <span class="glyphicon glyphicon-time"></span>
-                        Schedule Job
-                    </button>
-                </span>
+                        <button class="btn" {{action "addJob"}} disabled={{this.isBusy}}>
+                            <span class="glyphicon glyphicon-time"></span>
+                            Schedule Job
+                        </button>
+                    </span>
                 </div>
             </div>
         </div>
@@ -61,7 +61,7 @@
                     Taken at: {{this.latestPhoto.timestamp}}
                 </div>
                 <div class="row">
-                    <img src="{{this.latestPhoto.dataUrl}}"  alt="Last Photo Taken" />
+                    <img src={{this.latestPhoto.dataUrl}}  alt="Last Photo Taken">
                 </div>
             {{/if}}
         </div>
@@ -103,9 +103,10 @@
     <div class="panel-body">
         {{#each this.messages as |message index|}}
             <div class="row">
-                <span class="timestamp">{{message.timestamp}}
+                <span class="timestamp">
+                    {{message.timestamp}}
                     {{#if (eq index 0)}}
-                        <span class="label {{if message.error 'label-danger'}} {{if message.complete 'label-success'}}">
+                        <span class="label {{if message.error "label-danger"}} {{if message.complete "label-success"}}">
                             {{message.status}}
                         </span>
                     {{else}}

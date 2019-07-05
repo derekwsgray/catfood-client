@@ -1,11 +1,11 @@
-<form {{action 'authenticate' on='submit'}}>
+<form {{action "authenticate" on="submit"}}>
     <div class="row">
         <label for="identification">Login</label>
-        <Input @id='identification' @placeholder='Enter Login' @value={{this.identification}} />
+        <Input @id="identification" @placeholder="Enter Login" @value={{this.identification}} />
     </div>
     <div class="row">
         <label for="password">Password</label>
-        <Input @id='password' @placeholder='Enter Password' @type='password' @value={{this.password}} />
+        <Input @id="password" @placeholder="Enter Password" @type="password" @value={{this.password}} />
     </div>
 
     <div class="row">
