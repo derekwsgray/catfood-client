@@ -8,8 +8,8 @@ export default Controller.extend({
         authenticate() {
             this.set('isLoggingIn', true);
             this.set('errorMessage', '');
-            const { identification, password } = this.getProperties('identification', 'password');
-            this.get('session').authenticate('authenticator:oauth2', identification, password).catch((reason) => {
+            const { identification, password } = this;
+            this.session.authenticate('authenticator:oauth2', identification, password).catch((reason) => {
                 this.set('errorMessage', reason.error);
             });
         }

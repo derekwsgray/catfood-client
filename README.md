@@ -35,9 +35,14 @@ Make use of the many generators for code, try `ember help generate` for more det
 
 ### Linting
 
+<<<<<<< HEAD
 * `npm run lint:hbs`
 * `npm run lint:js`
 * `npm run lint:js -- --fix`
+=======
+* `yarn lint`
+* `yarn lint:fix`
+>>>>>>> 0a3836d... v3.10.1...v3.27.0
 
 ### Building
 

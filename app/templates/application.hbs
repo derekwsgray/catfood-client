@@ -1,9 +1,17 @@
+<<<<<<< HEAD
 <div class="container">
     {{#if session.isAuthenticated}}
         <a  role="button" {{action "invalidateSession"}}>Logout</a>
     {{else}}
         {{#link-to "login"}}Login{{/link-to}}
     {{/if}}
+=======
+{{page-title "CatfoodClient"}}
+
+{{!-- The following component displays Ember's default welcome message. --}}
+<WelcomePage />
+{{!-- Feel free to remove this! --}}
+>>>>>>> 0a3836d... v3.10.1...v3.27.0
 
     <h2>CatFood! v1.0</h2>
     <div class="body">

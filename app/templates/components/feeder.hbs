@@ -33,12 +33,7 @@
             <h4>New Job</h4>
             <div class="row">
                 <div class="input-group">
-                    {{input
-                        value=this.cronJobEnglish
-                        placeholder="E.g. 'every day at 6:30am'"
-                        class="form-control"
-                        disabled=this.isBusy
-                    }}
+                    <Input @value={{this.cronJobEnglish}} placeholder="E.g. 'every day at 6:30am'" class="form-control" @disabled={{this.isBusy}} />
                     <span class="input-group-btn">
                         <button class="btn" {{action "addJob"}} disabled={{this.isBusy}}>
                             <span class="glyphicon glyphicon-time"></span>
